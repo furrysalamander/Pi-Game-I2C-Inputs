@@ -35,15 +35,15 @@ int main()
         //rx_buffer_t rx_buffer = *((rx_buffer_t*)rx_buffer_tmp);
         for (int i = 0; i < BUTTON_COUNT; i++)
         {
-            cout << rx_buffer.buttons[i];
+            cout << (int)rx_buffer.buttons[i];
         }
         cout << endl;
         for (int i = 0; i < AXIS_COUNT; i++)
         {
-            cout << rx_buffer.axis[i];
+            cout << rx_buffer.axis[i] << ' ';
         }
         cout << endl;
-        sleep(1);
+        usleep(500000);
     }
 
     return 0;
