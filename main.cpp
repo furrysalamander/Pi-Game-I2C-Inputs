@@ -36,7 +36,7 @@ int main()
         cout << endl;
         for (int i = 0; i < AXIS_COUNT; i++)
         {
-            cout << rx_buffer.buttons[i];
+            cout << rx_buffer.axis[i];
         }
         cout << endl;
     }
