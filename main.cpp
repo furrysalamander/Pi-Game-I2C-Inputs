@@ -1,6 +1,7 @@
 #include <iostream>
 #include <errno.h>
 #include <wiringPiI2C.h>
+#include <unistd.h>
 
 const uint8_t BUTTON_COUNT = 16;
 const uint8_t AXIS_COUNT = 4;
@@ -40,6 +41,7 @@ int main()
             cout << rx_buffer.axis[i];
         }
         cout << endl;
+        usleep(100);
     }
 
     return 0;
