@@ -26,11 +26,13 @@ int main()
         cout << "\033[2J\033[1;1H";
         cout << "Starting Test..." << endl;
 
-        for (int i = 0; i < sizeof(rx_buffer_t); i++)
-        {
-            rx_buffer_tmp[i] = wiringPiI2CRead(fd);
-        }
-        rx_buffer_t rx_buffer = *((rx_buffer_t*)rx_buffer_tmp);
+        // for (int i = 0; i < sizeof(rx_buffer_t); i++)
+        // {
+        //     rx_buffer_tmp[i] = wiringPiI2CRead(fd);
+        // }
+        rx_buffer_t rx_buffer;
+        read(fd, rx_buffer, sizeof(rx_buffer_t));
+        //rx_buffer_t rx_buffer = *((rx_buffer_t*)rx_buffer_tmp);
         for (int i = 0; i < BUTTON_COUNT; i++)
         {
             cout << rx_buffer.buttons[i];
@@ -41,7 +43,7 @@ int main()
             cout << rx_buffer.axis[i];
         }
         cout << endl;
-        usleep(100);
+        sleep(1);
     }
 
     return 0;
