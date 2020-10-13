@@ -31,7 +31,7 @@ int main()
         //     rx_buffer_tmp[i] = wiringPiI2CRead(fd);
         // }
         rx_buffer_t rx_buffer;
-        read(fd, rx_buffer, sizeof(rx_buffer_t));
+        read(fd, &rx_buffer, sizeof(rx_buffer_t));
         //rx_buffer_t rx_buffer = *((rx_buffer_t*)rx_buffer_tmp);
         for (int i = 0; i < BUTTON_COUNT; i++)
         {
