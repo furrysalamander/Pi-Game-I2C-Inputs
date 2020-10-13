@@ -20,10 +20,11 @@ int main()
 
     fd = wiringPiI2CSetup(0x08);
 
-    cout << "Starting Test..." << endl;
-
     while(true)
     {
+        cout << "\033[2J\033[1;1H";
+        cout << "Starting Test..." << endl;
+
         for (int i = 0; i < sizeof(rx_buffer_t); i++)
         {
             rx_buffer_tmp[i] = wiringPiI2CRead(fd);
