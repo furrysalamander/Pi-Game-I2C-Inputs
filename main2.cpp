@@ -94,19 +94,19 @@ int main()
     uidev.absmax[ABS_X] = 512; // Max and min values
     uidev.absmin[ABS_X] = -512;
     uidev.absfuzz[ABS_X] = 0;  // Noise Filtering Parameter
-    uidev.absflat[ABS_X] = 16; // Deadzone
+    uidev.absflat[ABS_X] = 32; // Deadzone
     uidev.absmax[ABS_Y] = 512;
     uidev.absmin[ABS_Y] = -512;
     uidev.absfuzz[ABS_Y] = 0;
-    uidev.absflat[ABS_Y] = 16;
+    uidev.absflat[ABS_Y] = 32;
     uidev.absmax[ABS_RX] = 512;
     uidev.absmin[ABS_RX] = -512;
     uidev.absfuzz[ABS_RX] = 0;
-    uidev.absflat[ABS_RX] = 16;
+    uidev.absflat[ABS_RX] = 32;
     uidev.absmax[ABS_RY] = 512;
     uidev.absmin[ABS_RY] = -512;
     uidev.absfuzz[ABS_RY] = 0;
-    uidev.absflat[ABS_RY] = 16;
+    uidev.absflat[ABS_RY] = 32;
 
     if (write(gamepad_fd, &uidev, sizeof(uidev)) < 0) //writing settings
     {
