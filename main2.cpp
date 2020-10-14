@@ -3,6 +3,13 @@
 #include <wiringPiI2C.h>
 #include <unistd.h>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <fcntl.h>
+#include <linux/input.h>
+#include <linux/uinput.h>
+
 using namespace std;
 
 const uint8_t BUTTON_COUNT = 16;
