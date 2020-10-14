@@ -121,7 +121,7 @@ int main()
 
     while (1)
     {
-        read(fd, &rx_buffer, sizeof(rx_buffer_t)); // Read in the button and joystick status
+        read(i2c_fd, &rx_buffer, sizeof(rx_buffer_t)); // Read in the button and joystick status
 
         for (int i = 0; i < BUTTON_COUNT - 1; i++)
         {
