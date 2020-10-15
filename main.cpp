@@ -126,8 +126,8 @@ int main()
 
         for (int i = 0; i < BUTTON_COUNT - 1; i++)
         {
-            emit(gamepad_fd, EV_KEY, BUTTONS[i], static_cast<int>(rx_buffer.buttons[i])); // send the event for each button
-            cout << rx_buffer.buttons[i];
+            emit(gamepad_fd, EV_KEY, BUTTONS[i], rx_buffer.buttons[i]); // send the event for each button
+            cout << static_cast<int>(rx_buffer.buttons[i]);
         }
         for (int i = 0; i < AXIS_COUNT; i++)
         {
