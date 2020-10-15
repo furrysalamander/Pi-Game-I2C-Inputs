@@ -56,6 +56,7 @@ int main()
     }
 
     bool needs_update = false;
+    uint8_t backlight_brightness = 128;
 
     while (1)
     {
@@ -68,7 +69,6 @@ int main()
             {
                 previous_state.buttons[i] = rx_buffer.buttons[i];
                 needs_update = true;
-                cout << i << endl;
                 emit(gamepad_fd, EV_KEY, BUTTONS[i], rx_buffer.buttons[i]); // send the event for each button
             }
         }
@@ -85,6 +85,11 @@ int main()
         if (needs_update)
         {
             emit(gamepad_fd, EV_SYN, SYN_REPORT, 0); // send a synchronize report, to signify that this is the last of the data for this event
+            if (rx_buffer.buttons[BUTTON_COUNT - 1])
+            {
+                backlight_brightness += 51;
+                write(i2c_fd, backlight_brightness);
+            }
         }
 
         usleep(POLLING_DELAY);
