@@ -85,7 +85,7 @@ int main()
         if (needs_update)
         {
             emit(gamepad_fd, EV_SYN, SYN_REPORT, 0); // send a synchronize report, to signify that this is the last of the data for this event
-            if (rx_buffer.buttons[BUTTON_COUNT - 1])
+            if (rx_buffer.buttons[1])
             {
                 backlight_brightness += 51;
                 write(i2c_fd, &backlight_brightness, 1);
