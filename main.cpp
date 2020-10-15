@@ -17,6 +17,8 @@ using namespace std;
 const uint8_t BUTTON_COUNT = 16;
 const uint8_t AXIS_COUNT = 4;
 
+const int POLLING_DELAY = 10000; // Decrease this value to increase the polling speed
+
 const int BUTTONS[BUTTON_COUNT - 1] = {
     BTN_A,         BTN_B,         BTN_X,          BTN_Y,      BTN_DPAD_UP,
     BTN_DPAD_DOWN, BTN_DPAD_LEFT, BTN_DPAD_RIGHT, BTN_TL,     BTN_TR,
@@ -31,7 +33,7 @@ struct rx_buffer_t
 {
     uint8_t buttons[BUTTON_COUNT];
     int16_t axis[AXIS_COUNT];
-} rx_buffer;
+} rx_buffer, previous_state;
 
 int emit(int fd, int type, int code, int val)
 {
@@ -53,21 +55,38 @@ int main()
         return 1;
     }
 
+    bool needs_update = false;
+
     while (1)
     {
         read(i2c_fd, &rx_buffer, sizeof(rx_buffer_t)); // Read in the button and joystick status
 
         for (int i = 0; i < BUTTON_COUNT - 1; i++)
         {
-            emit(gamepad_fd, EV_KEY, BUTTONS[i], rx_buffer.buttons[i]); // send the event for each button
+            // We only want to bother sending an update if something actually changes.
+            if (previous_state.buttons[i] != rx_buffer.buttons[i])
+            {
+                previous_state.buttons[i] = rx_buffer.buttons[i];
+                needs_update = true;
+                emit(gamepad_fd, EV_KEY, BUTTONS[i], rx_buffer.buttons[i]); // send the event for each button
+            }
         }
         for (int i = 0; i < AXIS_COUNT; i++)
         {
-            emit(gamepad_fd, EV_ABS, AXIS[i], rx_buffer.axis[i]); // send the event for each axis
+            // We only want to bother sending an update if something actually changes.
+            if (previous_state.axis[i] != rx_buffer.axis[i])
+            {
+                previous_state.axis[i] = rx_buffer.axis[i];
+                needs_update = true;
+                emit(gamepad_fd, EV_ABS, AXIS[i], rx_buffer.axis[i]); // send the event for each axis
+            }
         }
-        emit(gamepad_fd, EV_SYN, SYN_REPORT, 0); // send a synchronize report, to signify that this is the last of the data for this event
+        if (needs_update)
+        {
+            emit(gamepad_fd, EV_SYN, SYN_REPORT, 0); // send a synchronize report, to signify that this is the last of the data for this event
+        }
 
-        usleep(10000); // Decrease this value to increase the polling speed
+        usleep(POLLING_DELAY);
     }
 
     if (ioctl(gamepad_fd, UI_DEV_DESTROY) < 0)
