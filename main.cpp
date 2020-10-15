@@ -88,7 +88,7 @@ int main()
             if (rx_buffer.buttons[BUTTON_COUNT - 1])
             {
                 backlight_brightness += 51;
-                write(i2c_fd, backlight_brightness);
+                write(i2c_fd, backlight_brightness, 1);
             }
         }
 
