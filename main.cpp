@@ -122,18 +122,18 @@ int main()
     while (1)
     {
         read(i2c_fd, &rx_buffer, sizeof(rx_buffer_t)); // Read in the button and joystick status
-        cout << '\r';
-        cout << "                                                 ";
-        cout << '\r';
+        //cout << '\r';
+        //cout << "                                                 ";
+        //cout << '\r';
 
         for (int i = 0; i < BUTTON_COUNT - 1; i++)
         {
             emit(gamepad_fd, EV_KEY, BUTTONS[i], rx_buffer.buttons[i]); // send the event for each button
-            cout << static_cast<int>(rx_buffer.buttons[i]);
+            //cout << static_cast<int>(rx_buffer.buttons[i]);
         }
         for (int i = 0; i < AXIS_COUNT; i++)
         {
-            cout << ' ' << rx_buffer.axis[i];
+            //cout << ' ' << rx_buffer.axis[i];
             emit(gamepad_fd, EV_ABS, AXIS[i], rx_buffer.axis[i]); // send the event for each axis
         }
 
@@ -141,7 +141,7 @@ int main()
         // emit(gamepad_fd, EV_ABS, ABS_X, 256);    
         emit(gamepad_fd, EV_SYN, SYN_REPORT, 0); // send a synchronize report, to signify that this is the last of the data for this event
         cout << flush;
-        usleep(5000);
+        usleep(10000);
     }
 
     if (ioctl(gamepad_fd, UI_DEV_DESTROY) < 0)
