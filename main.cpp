@@ -68,7 +68,7 @@ int main()
             {
                 previous_state.buttons[i] = rx_buffer.buttons[i];
                 needs_update = true;
-                //cout << i << endl;
+                cout << i << endl;
                 emit(gamepad_fd, EV_KEY, BUTTONS[i], rx_buffer.buttons[i]); // send the event for each button
             }
         }
