@@ -94,19 +94,19 @@ int main()
     uidev.absmax[ABS_X] = 512; // Max and min values
     uidev.absmin[ABS_X] = -512;
     uidev.absfuzz[ABS_X] = 0;  // Noise Filtering Parameter
-    uidev.absflat[ABS_X] = 256; // Deadzone
+    uidev.absflat[ABS_X] = 192; // Deadzone
     uidev.absmax[ABS_Y] = 512;
     uidev.absmin[ABS_Y] = -512;
     uidev.absfuzz[ABS_Y] = 0;
-    uidev.absflat[ABS_Y] = 256;
+    uidev.absflat[ABS_Y] = 192;
     uidev.absmax[ABS_RX] = 512;
     uidev.absmin[ABS_RX] = -512;
     uidev.absfuzz[ABS_RX] = 0;
-    uidev.absflat[ABS_RX] = 256;
+    uidev.absflat[ABS_RX] = 192;
     uidev.absmax[ABS_RY] = 512;
     uidev.absmin[ABS_RY] = -512;
     uidev.absfuzz[ABS_RY] = 0;
-    uidev.absflat[ABS_RY] = 256;
+    uidev.absflat[ABS_RY] = 192;
 
     if (write(gamepad_fd, &uidev, sizeof(uidev)) < 0) //writing settings
     {
@@ -126,7 +126,7 @@ int main()
 
         for (int i = 0; i < BUTTON_COUNT - 1; i++)
         {
-            emit(gamepad_fd, EV_KEY, BUTTONS[i], rx_buffer.buttons[i]); // send the event for each button
+            emit(gamepad_fd, EV_KEY, BUTTONS[i], static_cast<int>(rx_buffer.buttons[i])); // send the event for each button
             cout << rx_buffer.buttons[i];
         }
         for (int i = 0; i < AXIS_COUNT; i++)
