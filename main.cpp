@@ -17,7 +17,7 @@ using namespace std;
 const uint8_t BUTTON_COUNT = 16;
 const uint8_t AXIS_COUNT = 4;
 
-const int POLLING_DELAY = 10000; // Decrease this value to increase the polling speed
+const int POLLING_DELAY = 1000; // Decrease this value to increase the polling speed
 
 const int BUTTONS[BUTTON_COUNT - 1] = {
     BTN_A,         BTN_B,         BTN_X,          BTN_Y,      BTN_DPAD_UP,
@@ -68,6 +68,7 @@ int main()
             {
                 previous_state.buttons[i] = rx_buffer.buttons[i];
                 needs_update = true;
+                cout << i << endl;
                 emit(gamepad_fd, EV_KEY, BUTTONS[i], rx_buffer.buttons[i]); // send the event for each button
             }
         }
