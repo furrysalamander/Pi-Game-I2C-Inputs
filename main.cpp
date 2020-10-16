@@ -70,7 +70,7 @@ int main()
             {
                 previous_state.buttons[i] = rx_buffer.buttons[i];
                 needs_update = true;
-                if (i == (1) && rx_buffer.buttons[i])
+                if ((i == 1) && rx_buffer.buttons[i])
                 {
                     send_backlight = true;
                 }
@@ -92,6 +92,7 @@ int main()
             emit(gamepad_fd, EV_SYN, SYN_REPORT, 0); // send a synchronize report, to signify that this is the last of the data for this event
             if (send_backlight)
             {
+                send_backlight = false;
                 usleep(POLLING_DELAY * 4);
                 backlight_brightness += 51;
                 wiringPiI2CWrite(i2c_fd, backlight_brightness);
