@@ -70,7 +70,7 @@ int main()
             {
                 previous_state.buttons[i] = rx_buffer.buttons[i];
                 needs_update = true;
-                if (i == (BUTTON_COUNT - 1) && rx_buffer.buttons[i])
+                if (i == (1) && rx_buffer.buttons[i])
                 {
                     send_backlight = true;
                 }
