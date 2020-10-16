@@ -70,7 +70,7 @@ int main()
             {
                 previous_state.buttons[i] = rx_buffer.buttons[i];
                 needs_update = true;
-                if (i == (BUTTON_COUNT - 1))
+                if (i == (BUTTON_COUNT - 1) && rx_buffer.buttons[i])
                 {
                     send_backlight = true;
                 }
@@ -90,7 +90,7 @@ int main()
         if (needs_update)
         {
             emit(gamepad_fd, EV_SYN, SYN_REPORT, 0); // send a synchronize report, to signify that this is the last of the data for this event
-            if (rx_buffer.buttons[1])
+            if (send_backlight)
             {
                 usleep(POLLING_DELAY * 4);
                 backlight_brightness += 51;
