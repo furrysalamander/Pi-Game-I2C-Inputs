@@ -95,7 +95,7 @@ int main()
                 usleep(POLLING_DELAY * 4);
                 backlight_brightness += 51;
                 wiringPiI2CWrite(i2c_fd, backlight_brightness);
-                usleep(POLLING_DELAY * 4);
+                usleep(POLLING_DELAY * 8);
             }
         }
 
