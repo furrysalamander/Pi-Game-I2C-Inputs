@@ -56,8 +56,6 @@ int main()
     }
 
     bool needs_update = false;
-    bool send_backlight = false;
-    uint8_t backlight_brightness = 128;
 
     while (1)
     {
@@ -70,10 +68,6 @@ int main()
             {
                 previous_state.buttons[i] = rx_buffer.buttons[i];
                 needs_update = true;
-                if ((i == 1) && rx_buffer.buttons[i])
-                {
-                    send_backlight = true;
-                }
                 emit(gamepad_fd, EV_KEY, BUTTONS[i], rx_buffer.buttons[i]); // send the event for each button
             }
         }
@@ -90,14 +84,6 @@ int main()
         if (needs_update)
         {
             emit(gamepad_fd, EV_SYN, SYN_REPORT, 0); // send a synchronize report, to signify that this is the last of the data for this event
-            if (send_backlight)
-            {
-                send_backlight = false;
-                usleep(POLLING_DELAY * 16);
-                backlight_brightness += 51;
-                wiringPiI2CWrite(i2c_fd, backlight_brightness);
-                usleep(POLLING_DELAY * 16);
-            }
         }
 
         usleep(POLLING_DELAY);
