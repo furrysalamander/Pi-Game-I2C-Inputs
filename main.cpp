@@ -92,9 +92,10 @@ int main()
             emit(gamepad_fd, EV_SYN, SYN_REPORT, 0); // send a synchronize report, to signify that this is the last of the data for this event
             if (rx_buffer.buttons[1])
             {
-                usleep(POLLING_DELAY);
+                usleep(POLLING_DELAY * 2);
                 backlight_brightness += 51;
                 wiringPiI2CWrite(i2c_fd, backlight_brightness);
+                usleep(POLLING_DELAY * 2);
             }
         }
 
