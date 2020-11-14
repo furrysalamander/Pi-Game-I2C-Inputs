@@ -64,7 +64,7 @@ int main()
         for (int i = 0; i < BUTTON_COUNT - 1; i++)
         {
             // We only want to bother sending an update if something actually changes.
-            if (previous_state.buttons[i] != rx_buffer.buttons[i])
+            if (previous_state.buttons[i] != rx_buffer.buttons[i] && ((rx_buffer.buttons[i] == 0)) || (rx_buffer.buttons[i] == 1))
             {
                 previous_state.buttons[i] = rx_buffer.buttons[i];
                 needs_update = true;
