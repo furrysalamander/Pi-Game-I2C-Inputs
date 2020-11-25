@@ -17,7 +17,8 @@ using namespace std;
 const uint8_t BUTTON_COUNT = 16;
 const uint8_t AXIS_COUNT = 4;
 
-const int POLLING_DELAY = 2000; // Decrease this value to increase the polling speed
+//const int POLLING_DELAY = 2000; // Decrease this value to increase the polling speed
+const int POLLING_DELAY = 20000;
 
 const int BUTTONS[BUTTON_COUNT - 1] = {
     BTN_A,         BTN_B,         BTN_X,          BTN_Y,      BTN_DPAD_UP,
@@ -72,6 +73,7 @@ int main()
             }
             cout << static_cast<int>(rx_buffer.buttons[i]);
         }
+        cout << ' ';
         for (int i = 0; i < AXIS_COUNT; i++)
         {
             // We only want to bother sending an update if something actually changes.
@@ -81,6 +83,7 @@ int main()
                 needs_update = true;
                 emit(gamepad_fd, EV_ABS, AXIS[i], rx_buffer.axis[i]); // send the event for each axis
             }
+            cout << static_cast<int>(rx_buffer.axis[i]);
         }
         if (needs_update)
         {
