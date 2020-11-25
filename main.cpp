@@ -88,7 +88,7 @@ int main()
                 needs_update = true;
                 emit(gamepad_fd, EV_ABS, AXIS[i], rx_buffer.axis[i]); // send the event for each axis
             }
-            cout << static_cast<int>(rx_buffer.axis[i]);
+            cout << static_cast<int>(rx_buffer.axis[i]) << ' ';
         }
         if (needs_update)
         {
