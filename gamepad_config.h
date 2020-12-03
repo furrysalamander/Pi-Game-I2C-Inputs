@@ -58,20 +58,37 @@ int init_gamepad(int& gamepad_fd) {
 
     // Parameters for the joysticks.
     // These have to be set for both axes on both joysticks.
-    uidev.absmax[ABS_X] = 1023; // Max and min values
-    uidev.absmin[ABS_X] = 0;
+    // uidev.absmax[ABS_X] = 1023; // Max and min values
+    // uidev.absmin[ABS_X] = 0;
+    // uidev.absfuzz[ABS_X] = 0;  // Noise Filtering Parameter
+    // uidev.absflat[ABS_X] = 64; // Deadzone
+    // uidev.absmax[ABS_Y] = 1023;
+    // uidev.absmin[ABS_Y] = 0;
+    // uidev.absfuzz[ABS_Y] = 0;
+    // uidev.absflat[ABS_Y] = 64;
+    // uidev.absmax[ABS_RX] = 1023;
+    // uidev.absmin[ABS_RX] = 0;
+    // uidev.absfuzz[ABS_RX] = 0;
+    // uidev.absflat[ABS_RX] = 64;
+    // uidev.absmax[ABS_RY] = 1023;
+    // uidev.absmin[ABS_RY] = 0;
+    // uidev.absfuzz[ABS_RY] = 0;
+    // uidev.absflat[ABS_RY] = 64;
+
+    uidev.absmax[ABS_X] = 770; // Max and min values
+    uidev.absmin[ABS_X] = 258;
     uidev.absfuzz[ABS_X] = 0;  // Noise Filtering Parameter
     uidev.absflat[ABS_X] = 64; // Deadzone
-    uidev.absmax[ABS_Y] = 1023;
-    uidev.absmin[ABS_Y] = 0;
+    uidev.absmax[ABS_Y] = 770;
+    uidev.absmin[ABS_Y] = 258;
     uidev.absfuzz[ABS_Y] = 0;
     uidev.absflat[ABS_Y] = 64;
-    uidev.absmax[ABS_RX] = 1023;
-    uidev.absmin[ABS_RX] = 0;
+    uidev.absmax[ABS_RX] = 770;
+    uidev.absmin[ABS_RX] = 258;
     uidev.absfuzz[ABS_RX] = 0;
     uidev.absflat[ABS_RX] = 64;
-    uidev.absmax[ABS_RY] = 1023;
-    uidev.absmin[ABS_RY] = 0;
+    uidev.absmax[ABS_RY] = 770;
+    uidev.absmin[ABS_RY] = 258;
     uidev.absfuzz[ABS_RY] = 0;
     uidev.absflat[ABS_RY] = 64;
 

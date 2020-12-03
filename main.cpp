@@ -61,12 +61,12 @@ int main()
     while (1)
     {
         read(i2c_fd, &rx_buffer, sizeof(rx_buffer_t)); // Read in the button and joystick status
-        cout << '\r';
-        for (int i = 0; i < 25; i++)
-        {
-            cout << ' ';
-        }
-        cout << '\r';
+        //cout << '\r';
+        //for (int i = 0; i < 25; i++)
+        //{
+        //    cout << ' ';
+        //}
+        //cout << '\r';
         for (int i = 0; i < BUTTON_COUNT - 1; i++)
         {
             // We only want to bother sending an update if something actually changes.
@@ -76,9 +76,9 @@ int main()
                 needs_update = true;
                 emit(gamepad_fd, EV_KEY, BUTTONS[i], rx_buffer.buttons[i]); // send the event for each button
             }
-            cout << static_cast<int>(rx_buffer.buttons[i]);
+            //cout << static_cast<int>(rx_buffer.buttons[i]);
         }
-        cout << ' ';
+        //cout << ' ';
         for (int i = 0; i < AXIS_COUNT; i++)
         {
             // We only want to bother sending an update if something actually changes.
@@ -88,13 +88,13 @@ int main()
                 needs_update = true;
                 emit(gamepad_fd, EV_ABS, AXIS[i], rx_buffer.axis[i]); // send the event for each axis
             }
-            cout << static_cast<int>(rx_buffer.axis[i]) << ' ';
+            //cout << static_cast<int>(rx_buffer.axis[i]) << ' ';
         }
         if (needs_update)
         {
             emit(gamepad_fd, EV_SYN, SYN_REPORT, 0); // send a synchronize report, to signify that this is the last of the data for this event
         }
-        cout << flush;
+        //cout << flush;
         usleep(POLLING_DELAY);
     }
 
