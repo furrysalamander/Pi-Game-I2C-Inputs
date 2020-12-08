@@ -56,6 +56,11 @@ int main()
         return 1;
     }
 
+    // Turn the backlight on
+    uint8_t tx_buffer[1];
+    tx_buffer[0] = 1;
+    write(i2c_fd, &tx_buffer, 1);
+
     bool needs_update = false;
 
     while (1)
@@ -67,6 +72,7 @@ int main()
         //    cout << ' ';
         //}
         //cout << '\r';
+        if(!rx_buffer.buttons[BUTTON_COUNT - 1])
         for (int i = 0; i < BUTTON_COUNT - 1; i++)
         {
             // We only want to bother sending an update if something actually changes.
@@ -79,6 +85,7 @@ int main()
             //cout << static_cast<int>(rx_buffer.buttons[i]);
         }
         //cout << ' ';
+        if(!rx_buffer.buttons[BUTTON_COUNT - 1])
         for (int i = 0; i < AXIS_COUNT; i++)
         {
             // We only want to bother sending an update if something actually changes.
