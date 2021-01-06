@@ -23,5 +23,3 @@ sed -i "s/exit/~\/fbcp-ili9312 \&\n\~\/Pi-Game-I2C-Inputs\/i2c_driver \&\n&/g" /
 
 sed -i "s/#disable_overscan/disable_overscan/g" /boot/config.txt
 sed -i "s/#dtparam=i2c_arm/dtparam=i2c_arm/g" /boot/config.txt
-
-curl -sS https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/i2samp.sh | bash
