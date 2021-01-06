@@ -6,6 +6,8 @@
 #git clone https://github.com/furrysalamander/Pi-Game-I2C-Inputs.git
 #cd Pi-Game-I2C-Inputs
 curl -sS https://raw.githubusercontent.com/adafruit/Raspberry-Pi-Installer-Scripts/master/i2samp.sh | bash
+
+apt-get install wiringpi
 g++ main.cpp -lwiringPi -o i2c_driver
 ./i2c_driver &
 
